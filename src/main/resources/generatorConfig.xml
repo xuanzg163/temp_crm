@@ -11,31 +11,26 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/crm01" userId="root" password="123456">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/crm01" userId="root" password="root">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="com.shsxt.crm.po" targetProject="I:/Tools/shsxt_crm/src/main/java">
+        <javaModelGenerator targetPackage="com.shsxt.crm.po" targetProject="I:/Tools/temp_crm/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!--生成映射文件存放位置-->
-        <sqlMapGenerator targetPackage="com.shsxt.crm.mapper" targetProject="I:/Tools/shsxt_crm/src/main/java">
+        <sqlMapGenerator targetPackage="com.shsxt.crm.mapper" targetProject="I:/Tools/temp_crm/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--生成Dao类存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shsxt.crm.dao" targetProject="I:/Tools/shsxt_crm/src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shsxt.crm.dao" targetProject="I:/Tools/temp_crm/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="t_sale_chance" domainObjectName="SaleChance"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>-->
-        <table tableName="t_cus_dev_plan" domainObjectName="CusDev" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <!--<table tableName="t_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    -->
     </context>
 </generatorConfiguration>
