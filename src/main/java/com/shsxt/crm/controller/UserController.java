@@ -1,5 +1,6 @@
 package com.shsxt.crm.controller;
 
+import com.shsxt.crm.base.BaseController;
 import com.shsxt.crm.dao.UserMapper;
 import com.shsxt.crm.exceptions.ParamsException;
 import com.shsxt.crm.model.ResultInfo;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -41,19 +42,9 @@ public class UserController {
          */
         Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
 
-        try {
-            userService.updateUserPwd(oldPassword,newPassword,confirmPassword,userId);
-            resultInfo.setMsg("修改成功");
-        } catch (ParamsException e) {
-            e.printStackTrace();
-            resultInfo.setCode(300);
-            resultInfo.setMsg(e.getMsg());
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultInfo.setCode(300);
-            resultInfo.setMsg(e.getMessage());
-        }
-        return resultInfo;
+        userService.updateUserPwd(oldPassword,newPassword,confirmPassword,userId);
+
+        return success("修改成功");
 
     }
     /**
@@ -65,22 +56,7 @@ public class UserController {
     @RequestMapping("login")
     @ResponseBody
     public ResultInfo login(String userName, String userPwd){
-        ResultInfo resultInfo = new ResultInfo();
-
-        try {
              UserInfo userInfo = userService.login(userName,userPwd);
-            resultInfo.setMsg("登陆成功");
-            resultInfo.setResult(userInfo);
-        } catch (ParamsException e) {
-            e.printStackTrace();
-            resultInfo.setCode(300);
-            resultInfo.setMsg(e.getMsg());
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultInfo.setCode(300);
-            resultInfo.setMsg(e.getMessage());
-        }
-
-        return resultInfo;
+             return success("登陆成功",userInfo);
     }
 }
