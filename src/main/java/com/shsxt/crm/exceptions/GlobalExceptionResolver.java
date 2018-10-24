@@ -2,6 +2,7 @@ package com.shsxt.crm.exceptions;
 
 import com.alibaba.fastjson.JSON;
 import com.shsxt.crm.model.ResultInfo;
+import constants.CrmConstant;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
@@ -22,13 +22,23 @@ import java.lang.reflect.Method;
  */
 @Component
 public class GlobalExceptionResolver implements HandlerExceptionResolver {
+
     @Override
-    public ModelAndView resolveException(HttpServletRequest httpServletRequest,
-                                         HttpServletResponse httpServletResponse,
+    public ModelAndView resolveException(HttpServletRequest request,
+                                         HttpServletResponse response,
                                          Object handler,
                                          Exception ex) {
 
-        ModelAndView mv = createDefaultModelAndView(httpServletRequest, ex);
+        ModelAndView mv = createDefaultModelAndView(request, ex);
+
+        /**
+         * 用户登陆异常错误
+         */
+        if (ex instanceof LoginException){
+            mv.addObject("errorMsg", CrmConstant.USER_NOT_LOGIN_MSG);
+            mv.setViewName("login_error");
+            return mv;
+        }
 
         /***
          * 1. 区分是什么异常
@@ -62,12 +72,12 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
                     mv.addObject("errorMsg",e.getMsg());
                 }
 
-                httpServletResponse.setCharacterEncoding("utf-8");
-                httpServletResponse.setContentType("application/json;charset=utf-8");
+                response.setCharacterEncoding("utf-8");
+                response.setContentType("application/json;charset=utf-8");
                 PrintWriter printWriter = null;
 
                 try {
-                    printWriter= httpServletResponse.getWriter();
+                    printWriter= response.getWriter();
                     printWriter.write(JSON.toJSONString(resultInfo));
                     printWriter.flush();
                     printWriter.close();
@@ -103,6 +113,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
          * 上下文路径
          */
         modelAndView.addObject("ctx",request.getContextPath());
+        modelAndView.addObject("uri",request.getRequestURI());
         return modelAndView;
     }
 }
