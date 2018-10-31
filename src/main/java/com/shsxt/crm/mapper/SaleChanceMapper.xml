@@ -187,4 +187,26 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <!--查询销售机会管理信息-->
+<select id="queryByParams" parameterType="saleChanceQuery" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List"/>
+  from t_sale_chance
+  <where>
+    is_valid=1
+    <if test="null!=customerName and ''!=customerName">
+      and customer_name like concat('%',#{customerName},'%')
+    </if>
+    <if test="null!=state and ''!=state">
+      and state=#{state}
+    </if>
+    <if test="null!=devResult and ''!=devResult">
+      and dev_result=#{devResult}
+    </if>
+    <if test="null!=createDate and ''!=createDate">
+      and create_date &lt;= #{createDate}
+    </if>
+  </where>
+</select>
+
 </mapper>

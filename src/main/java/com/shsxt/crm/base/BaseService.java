@@ -59,6 +59,12 @@ public abstract class BaseService<T> {
     }
 
 
+    /**
+     * 分页查询
+     * @param baseQuery
+     * @return
+     * @throws DataAccessException
+     */
     public Map<String,Object> queryForPage(BaseQuery baseQuery) throws  DataAccessException{
         PageHelper.startPage(baseQuery.getPageNum(),baseQuery.getPageSize());
         List<T> entities=baseDao.queryByParams(baseQuery);
