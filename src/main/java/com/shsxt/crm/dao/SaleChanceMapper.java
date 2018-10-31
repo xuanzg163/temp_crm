@@ -1,17 +1,10 @@
 package com.shsxt.crm.dao;
 
+import com.shsxt.crm.base.BaseDao;
 import com.shsxt.crm.po.SaleChance;
+import org.springframework.stereotype.Repository;
 
-public interface SaleChanceMapper {
-    int deleteByPrimaryKey(Integer id);
+@Repository
+public interface SaleChanceMapper extends BaseDao<SaleChance> {
 
-    int insert(SaleChance record);
-
-    int insertSelective(SaleChance record);
-
-    SaleChance selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SaleChance record);
-
-    int updateByPrimaryKey(SaleChance record);
 }
