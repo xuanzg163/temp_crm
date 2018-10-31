@@ -19,6 +19,10 @@ public class SaleChanceController extends BaseController {
     @Autowired
     private SaleChanceService saleChanceService;
 
+    /**
+     * 显示销售机会管理页面
+     * @return
+     */
     @RequestMapping("index")
     public String index() {
         return "sale_chance";
