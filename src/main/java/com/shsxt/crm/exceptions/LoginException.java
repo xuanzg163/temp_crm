@@ -1,6 +1,6 @@
 package com.shsxt.crm.exceptions;
 
-import constants.CrmConstant;
+import com.shsxt.crm.constants.CrmConstant;
 
 /**
  * 自定义登陆异常

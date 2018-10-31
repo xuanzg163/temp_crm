@@ -1,4 +1,4 @@
-package constants;
+package com.shsxt.crm.constants;
 
 public class CrmConstant {
     public static final Integer OPS_SUCCESS_CODE=200;

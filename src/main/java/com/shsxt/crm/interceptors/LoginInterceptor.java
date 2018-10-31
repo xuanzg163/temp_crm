@@ -3,7 +3,7 @@ package com.shsxt.crm.interceptors;
 import com.shsxt.crm.service.UserService;
 import com.shsxt.crm.utils.AssertUtil;
 import com.shsxt.crm.utils.LoginUserUtil;
-import constants.CrmConstant;
+import com.shsxt.crm.constants.CrmConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 

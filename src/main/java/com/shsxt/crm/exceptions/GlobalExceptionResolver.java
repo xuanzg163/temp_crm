@@ -2,7 +2,7 @@ package com.shsxt.crm.exceptions;
 
 import com.alibaba.fastjson.JSON;
 import com.shsxt.crm.model.ResultInfo;
-import constants.CrmConstant;
+import com.shsxt.crm.constants.CrmConstant;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
