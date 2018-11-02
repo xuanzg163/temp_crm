@@ -22,9 +22,6 @@ public class IndexController extends BaseController {
      */
     @RequestMapping("index")
     public String index(HttpServletRequest request) {
-        request.setAttribute("ctx", request.getContextPath());
-
-        //当前项目路径
         return "index";
     }
 }

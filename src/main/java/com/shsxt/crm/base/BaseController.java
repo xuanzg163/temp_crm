@@ -41,8 +41,12 @@ public class BaseController {
     }
 
 
+    /**
+     * ctx 当前项目路径
+     * @param request
+     */
     @ModelAttribute
     public void preHandle(HttpServletRequest request){
-        request.setAttribute("ctx",request.getContextPath());//当前项目路径
+        request.setAttribute("ctx",request.getContextPath());
     }
 }
