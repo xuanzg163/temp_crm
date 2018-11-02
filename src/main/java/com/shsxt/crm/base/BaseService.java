@@ -60,7 +60,7 @@ public abstract class BaseService<T> {
 
 
     /**
-     * 分页查询
+     * 分页
      * @param baseQuery
      * @return
      * @throws DataAccessException

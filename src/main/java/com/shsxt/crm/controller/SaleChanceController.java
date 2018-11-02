@@ -7,6 +7,7 @@ import com.shsxt.crm.service.SaleChanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
@@ -25,13 +26,18 @@ public class SaleChanceController extends BaseController {
     private SaleChanceService saleChanceService;
 
     /**
-     * 显示营销机会管理信息
+     * 查询营销机会管理信息
      * @param query
      * @return
      */
     @RequestMapping("querySaleChancesByParams")
     @ResponseBody
-    public Map<String,Object> querySaleChancesByParams(SaleChanceQuery query){
+    public Map<String,Object> querySaleChancesByParams(
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "1") Integer rows,
+            SaleChanceQuery query){
+        query.setPageNum(page);
+        query.setPageSize(rows);
         return saleChanceService.queryForPage(query);
     }
 
