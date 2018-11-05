@@ -78,6 +78,8 @@ public class SaleChanceService extends BaseService<SaleChance> {
 
         } else {
             //更新
+            AssertUtil.isTrue(saleChanceMapper.update(saleChance) < 1,
+                    CrmConstant.OPS_FAILED_MSG);
         }
 
     }
