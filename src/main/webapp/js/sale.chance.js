@@ -50,7 +50,30 @@ $(function () {
     });
 });
 
-//添加营销机会
+//打开添加营销机会的弹窗
 function openAddSaleChacneDialog () {
+    $("#dlg").dialog("open")
+}
 
+//添加营销机会管理信息
+function saveOrUpdateSaleChance() {
+    $('#fm').form('submit', {
+        url: ctx + '/saleChance/saveOrUpdateSaleChance',
+        onSubmit: function () {
+            return $(this).form('validate');
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.code == 200) {
+                $.messager.alert('来自Crm', data.msg, 'info', function () {
+                    // 关闭弹窗
+                    $('#dlg').dialog('close');
+                    // 刷新数据表格
+                    $('#dg').datagrid('load');
+                });
+            } else {
+                $.messager.alert('来自Crm', data.msg, 'error');
+            }
+        }
+    });
 }

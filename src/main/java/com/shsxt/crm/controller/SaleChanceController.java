@@ -1,15 +1,19 @@
 package com.shsxt.crm.controller;
 
 import com.shsxt.crm.base.BaseController;
+import com.shsxt.crm.constants.CrmConstant;
+import com.shsxt.crm.model.ResultInfo;
 import com.shsxt.crm.po.SaleChance;
 import com.shsxt.crm.query.SaleChanceQuery;
 import com.shsxt.crm.service.SaleChanceService;
+import com.shsxt.crm.utils.LoginUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -24,6 +28,23 @@ public class SaleChanceController extends BaseController {
 
     @Autowired
     private SaleChanceService saleChanceService;
+
+    /**
+     * 添加或更新营销机会
+     * @param saleChance
+     * @param request
+     * @return
+     */
+    @RequestMapping("saveOrUpdateSaleChance")
+    @ResponseBody
+    public ResultInfo saveOrUpdateSaleChance(SaleChance saleChance,
+                                             HttpServletRequest request) {
+
+        //获取用户id
+        Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
+        saleChanceService.saveOrUpdateSaleChance(saleChance,userId);
+        return success(CrmConstant.OPS_SUCCESS_MSG);
+    }
 
     /**
      * 查询营销机会管理信息
