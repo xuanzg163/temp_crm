@@ -77,3 +77,35 @@ function saveOrUpdateSaleChance() {
         }
     });
 }
+
+//完善添加营销机会管理信息-取消按钮
+function closeDlg() {
+    //关闭弹窗
+    $('#dlg').dialog('close');
+}
+
+//更新营销机会管理信息
+function openModifySaleChanceDialog () {
+    //获取行号
+    var rows = $("#dg").datagrid("getSelections");
+    // console.log(rows);
+
+    if (rows.length == 0){
+        $.messager.alert('来自Crm', "请选择一条数据进行更新");
+        return;
+    }
+    if (rows.length > 1){
+        $.messager.alert('来自Crm', "只能选择一条数据进行更新");
+        return;
+    }
+
+    /**
+     * 回填表单数据
+     */
+    $("#fm").form("load",rows[0]);
+
+    /**
+     * 将表单数据显示在弹窗
+     */
+    $("#dlg").dialog("open").dialog("setTitle","更新营销机会");
+}
