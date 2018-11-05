@@ -31,6 +31,18 @@ public class SaleChanceController extends BaseController {
     private SaleChanceService saleChanceService;
 
     /**
+     * 删除/批量删除营销机会
+     * @param ids
+     * @return
+     */
+    @RequestMapping("deleteSaleChanceBatch")
+    @ResponseBody
+    public ResultInfo deleteSaleChanceBatch(Integer[] ids){
+        saleChanceService.deleteBatch(ids);
+        return success(CrmConstant.OPS_SUCCESS_MSG);
+    }
+
+    /**
      * 添加营销机会的时候显示下拉框中的客户经理
      * @return
      */

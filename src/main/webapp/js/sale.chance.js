@@ -109,3 +109,46 @@ function openModifySaleChanceDialog () {
      */
     $("#dlg").dialog("open").dialog("setTitle","更新营销机会");
 }
+
+//删除营销机会
+function deleteSaleChance() {
+    //获取行号
+    var rows = $("#dg").datagrid("getSelections");
+    // console.log(rows);
+
+    if (rows.length <= 0){
+        $.messager.alert('来自Crm', "请选择一条数据进行删除");
+        return;
+    }
+
+    $.messager.confirm('来自Crm', '确定删除'+rows.length+'条数据?',
+        function (r) {
+            if (r){
+                var ids = "";
+                for (var i = 0; i < rows.length; i++) {
+                    ids += "ids="+rows[i].id+"&";
+                }
+
+                //打印传给后台的参数
+                // console.log(ids);
+
+                //发送Ajax
+                $.ajax({
+                    url:ctx +"/saleChance/deleteSaleChanceBatch?"+ids,
+                    type:"post",
+                    success:function (data) {
+                        if (data.code == 200) {
+                            $.messager.alert('来自Crm', data.msg, 'info', function () {
+                                // 关闭弹窗
+                                $('#dlg').dialog('close');
+                                // 刷新数据表格
+                                $('#dg').datagrid('load');
+                            });
+                        } else {
+                            $.messager.alert('来自Crm', data.msg, 'error');
+                        }
+                    }
+                })
+            }
+        });
+}

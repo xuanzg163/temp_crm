@@ -187,7 +187,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <!--查询销售机会管理信息-->
+  <!--查询营销机会管理信息-->
 <select id="queryByParams" parameterType="saleChanceQuery" resultMap="BaseResultMap">
   select
   <include refid="Base_Column_List"/>
@@ -222,4 +222,13 @@ WHERE
 t_role.role_name = '客户经理'
 
   </select>
+
+  <!--删除/批量删除营销机会-->
+  <update id="deleteBatch">
+    update t_sale_chance set is_valid=0 where id in (
+    <foreach collection="array" item="item" separator=",">
+      #{item}
+    </foreach>
+    )
+  </update>
 </mapper>
