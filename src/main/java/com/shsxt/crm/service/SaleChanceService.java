@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhangxuan
@@ -29,6 +31,12 @@ public class SaleChanceService extends BaseService<SaleChance> {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 添加营销机会的时候显示下拉框中的客户经理
+     */
+    public List<Map> queryAllCustomerManager() {
+        return saleChanceMapper.queryAllCustomerManager();
+    }
 
     /**
      * 添加或更新营销机会

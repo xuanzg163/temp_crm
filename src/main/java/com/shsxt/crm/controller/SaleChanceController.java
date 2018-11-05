@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +29,16 @@ public class SaleChanceController extends BaseController {
 
     @Autowired
     private SaleChanceService saleChanceService;
+
+    /**
+     * 添加营销机会的时候显示下拉框中的客户经理
+     * @return
+     */
+    @RequestMapping("queryAllCustomerManager")
+    @ResponseBody
+    public List<Map> queryAllCustomerManager() {
+        return saleChanceService.queryAllCustomerManager();
+    }
 
     /**
      * 添加或更新营销机会
